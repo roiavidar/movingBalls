@@ -1,0 +1,23 @@
+@import './Ball.style.constants.scss';
+
+.ball {
+    position: absolute;
+    border-radius: 50%;
+    width: $ballWidth;
+    height: $ballHeight;
+    transition: auto;
+}
+
+.ball-in-the-middle {
+    background-color: $middleSide;
+}
+
+.ball-most-left-side {
+    background-color: $mostleftSide;
+    z-index: $zIndexEdgeBall;
+}
+
+.ball-most-right-side {
+    background-color: $mostRightSide;
+    z-index: $zIndexEdgeBall;
+}
