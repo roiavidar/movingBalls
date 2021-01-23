@@ -68,5 +68,6 @@ export default class MovingBallContainer {
 
     public destroy() {
         this.el.removeChild(this.container);
+        window.cancelAnimationFrame(this.animationId);
     }
 }
