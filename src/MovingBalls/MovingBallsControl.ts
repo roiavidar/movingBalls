@@ -23,13 +23,11 @@ export default class MovingBallsControl {
                 <input class='mb-balls-number' value=${this.numberOfBalls} type='number' min='${this.minBalls}' max='${this.maxBalls}' />
                 <button class='mb-move-balls-wrapper-1'>
                     <div class='mb-move-balls-wrapper-2'>
-                    <div class='mb-move-balls-wrapper-3'>
-                        <div class='mb-move-balls-wrapper-4'> 
-                        <i class="star"></i>
-                            RUN
-                        <i class="star"></i>
+                        <div class='mb-move-balls-wrapper-3'> 
+                            <i class="star"></i>
+                                RUN
+                            <i class="star"></i>
                         </div>
-                    </div>
                     </div>
                 </button>
             </div>
