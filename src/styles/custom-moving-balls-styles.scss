@@ -2,4 +2,5 @@ $mostRightSide: black;
 $mostleftSide: blue;
 $ballWidth: 30px;
 $ballsHeight: 10px;
+@import "./util/util-common.scss";
 @import "../MovingBalls/MovingBall.style.scss";

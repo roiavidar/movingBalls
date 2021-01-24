@@ -1,11 +1,9 @@
-
 @mixin fadeInGenerator($name, $start, $end) {
     @keyframes #{$name} {
         from {top: #{$start};}
         to   {top: #{$end};}
     }
 }
-
 
 @mixin star($size, $color) {
     .star.star {

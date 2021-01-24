@@ -1,6 +1,5 @@
 import MovingBallContainer from './MovingBalls/MovingBallsContainer';
 import "./styles/custom-moving-balls-styles.scss";
-import "./styles/common.scss";
 
 const root = document.getElementById('root');
 const mb = new MovingBallContainer(root, {
