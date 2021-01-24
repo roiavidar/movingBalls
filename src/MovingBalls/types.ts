@@ -16,4 +16,11 @@ export interface BallData {
     speed?: number
 }
 
-export const fileRoot = './MovingBalls/';
+export interface MovingBallsConfig {
+    minBalls?: number;
+    maxBalls?: number;
+    minSpeed?: number;
+    maxSpeed?: number;
+    minDistance?: number;
+    maxDistance?: number;
+}   

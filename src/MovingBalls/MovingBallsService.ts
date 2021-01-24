@@ -1,15 +1,24 @@
-import { BallColors, BallData } from "./types";
-
-const MIN_SPEED_VALUE = 0.002;
-const MAX_SPEED_VALUE = 1;
-const MIN_DISTANCE = 0;
-const MAX_DISTANCE = 100;
+import { BallColors, BallData, MovingBallsConfig } from "./types";
 
 export default class MovingBallsService {
     private balls: Map<number, BallData> = new Map();
     private ballCounter = 0;
+    private minSpeed: number;
+    private maxSpeed: number;
+    private minDistance: number;
+    private maxDistance: number;
+    static defaultParams = {
+        minSpeed: 0.002,
+        maxSpeed: 1,
+        minDistance: 0,
+        maxDistance: 100
+    };
 
-    constructor() {
+    constructor({minSpeed, maxSpeed, minDistance, maxDistance}: MovingBallsConfig = MovingBallsService.defaultParams) {
+        this.minSpeed = minSpeed || MovingBallsService.defaultParams.minSpeed;
+        this.maxSpeed = maxSpeed || MovingBallsService.defaultParams.maxSpeed;
+        this.minDistance = minDistance || MovingBallsService.defaultParams.minDistance;
+        this.maxDistance = maxDistance || MovingBallsService.defaultParams.maxDistance;
     }
 
     get Balls() {
@@ -39,7 +48,7 @@ export default class MovingBallsService {
             const ball = this.balls.get(this.ballCounter - i);
             ball.position = {
                 directionLTR: true,
-                y: Math.floor(Math.random() * MAX_DISTANCE) + MIN_DISTANCE,
+                y: Math.floor(Math.random() * this.maxDistance) + this.minDistance,
                 x: undefined
             }
         }
@@ -60,7 +69,7 @@ export default class MovingBallsService {
 
     private generateSpeeds() {
         this.balls.forEach((ball: BallData) => {
-            ball.speed = Math.random() * MAX_SPEED_VALUE + MIN_SPEED_VALUE
+            ball.speed = Math.random() * this.maxSpeed + this.minSpeed
         });
     }
 
@@ -70,14 +79,14 @@ export default class MovingBallsService {
                 if (ball.position.x === undefined) { // ball created
                     ball.position.x = 0;
                 } else { // ball moving ltr
-                    ball.position.x = Math.min(ball.position.x + ball.speed, MAX_DISTANCE);
-                    if (ball.position.x === MAX_DISTANCE) {
+                    ball.position.x = Math.min(ball.position.x + ball.speed, this.maxDistance);
+                    if (ball.position.x === this.maxDistance) {
                         ball.position.directionLTR = false;
                     }
                 }
             } else { // ball moving rlt
-                ball.position.x = Math.max(ball.position.x - ball.speed, MIN_DISTANCE);
-                if (ball.position.x === MIN_DISTANCE) {
+                ball.position.x = Math.max(ball.position.x - ball.speed, this.minDistance);
+                if (ball.position.x === this.minDistance) {
                     ball.position.directionLTR = true;
                 }
             }

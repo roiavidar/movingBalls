@@ -1,5 +1,4 @@
 import { BallColors, BallPosition } from "./types";
-import "./Ball.scss";
 
 export default class Ball {
     private ball: HTMLElement;

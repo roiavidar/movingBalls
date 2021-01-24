@@ -1,18 +1,26 @@
-import "./MovingBallsControl.scss";
+import { MovingBallsConfig } from "./types";
 
 export default class MovingBallsControl {
     private control: HTMLElement;
     private ballsInput: HTMLInputElement;
     private runBtn: HTMLButtonElement;
     private numberOfBalls: number = 0;
-    private minBalls = 0;
-    private maxBalls = 500;
+    private minBalls;
+    private maxBalls;
+
+    static defaultParams = {
+        minBalls: 0,
+        maxBalls: 500
+    }
 
     get NumberOfBalls() {
         return this.numberOfBalls;
     }
 
-    constructor(private el: HTMLElement, private run: Function) {
+    constructor(private el: HTMLElement, private run: Function, {minBalls, maxBalls}: MovingBallsConfig = MovingBallsControl.defaultParams) {
+        this.minBalls = minBalls || MovingBallsControl.defaultParams.minBalls;
+        this.maxBalls = maxBalls || MovingBallsControl.defaultParams.maxBalls;
+        this.numberOfBalls = this.minBalls;
         this.control = document.createElement('div');
         this.control.classList.add('mb-moving-ball-control');
         this.control.innerHTML = `

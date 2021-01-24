@@ -1,6 +1,6 @@
-$ballWidth: 50px;
-$ballHeight: 50px;
-$mostleftSide: green;
-$mostRightSide: red;
-$middleSide: yellow;
+$ballWidth: 50px !default;
+$ballHeight: 50px !default;
+$mostleftSide: green !default;
+$mostRightSide: red !default;
+$middleSide: yellow !default;
 $zIndexEdgeBall: 100;

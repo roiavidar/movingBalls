@@ -1,25 +1,26 @@
 import Ball from "./Ball";
 import MovingBallsControl from "./MovingBallsControl";
 import MovingBallsService from "./MovingBallsService";
-import { BallData } from "./types";
-import "./MovingBallsContainer.scss";
+import { BallData, MovingBallsConfig } from "./types";
 
 export default class MovingBallContainer {
-    private mbService = new MovingBallsService();
-    private ballsData: Map<number, BallData> = this.mbService.Balls;
+    private mbService;
+    private ballsData: Map<number, BallData>;
     private container: HTMLElement;
     private containerView: HTMLElement;
     private control: MovingBallsControl;
     private balls: Ball[] = [];
     private animationId: number;
     
-    constructor(private el: HTMLElement) {
+    constructor(private el: HTMLElement, config?: MovingBallsConfig) {
+        this.mbService = new MovingBallsService(config);
+        this.ballsData = this.mbService.Balls;
         this.container = document.createElement('div');
         this.container.classList.add('mb-moving-balls');
         this.containerView = document.createElement('div');
         this.containerView.classList.add('mb-moving-balls-view');
         this.container.appendChild(this.containerView);
-        this.control = new MovingBallsControl(this.containerView, this.run.bind(this));
+        this.control = new MovingBallsControl(this.containerView, this.run.bind(this), config);
         this.mbService.adjustNumberOfBalls(this.control.NumberOfBalls);
         this.adjustBallsArray(this.control.NumberOfBalls);
         this.el.appendChild(this.container);
