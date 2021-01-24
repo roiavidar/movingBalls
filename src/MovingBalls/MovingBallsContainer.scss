@@ -1,4 +1,4 @@
-@import './Ball.style.constants.scss';
+@import './Ball.style.variables.scss';
 
 $containerHeight: 600px;
 $containerWidth: 100%;
@@ -15,7 +15,7 @@ $containerBorder: 1px solid black;
 
 .mb-moving-balls-view {
     position: relative;
-    height: calc(#{$containerHeight} - #{$ballWidth});
+    height: calc(#{$containerHeight} - #{$ballHeight});
     width: calc(#{$containerWidth} - #{$ballWidth});
     box-sizing: border-box;
 }
