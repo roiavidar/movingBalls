@@ -17,7 +17,7 @@ export default class MovingBallsControl {
         return this.numberOfBalls;
     }
 
-    constructor(private el: HTMLElement, private run: Function, {minBalls, maxBalls}: MovingBallsConfig = MovingBallsControl.defaultParams) {
+    constructor(private containerEl: HTMLElement, private run: Function, {minBalls, maxBalls}: MovingBallsConfig = MovingBallsControl.defaultParams) {
         this.minBalls = minBalls || MovingBallsControl.defaultParams.minBalls;
         this.maxBalls = maxBalls || MovingBallsControl.defaultParams.maxBalls;
         this.numberOfBalls = this.minBalls;
@@ -53,10 +53,10 @@ export default class MovingBallsControl {
             }
         }
 
-        this.el.appendChild(this.control);
+        this.containerEl.appendChild(this.control);
     }
 
     public destroy() {
-        this.el.removeChild(this.control);
+        this.containerEl.removeChild(this.control);
     }
 }

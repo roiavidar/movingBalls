@@ -12,7 +12,7 @@ export default class MovingBallContainer {
     private balls: Ball[] = [];
     private animationId: number;
     
-    constructor(private el: HTMLElement, config?: MovingBallsConfig) {
+    constructor(private containerEl: HTMLElement, config?: MovingBallsConfig) {
         this.mbService = new MovingBallsService(config);
         this.ballsData = this.mbService.Balls;
         this.container = document.createElement('div');
@@ -23,7 +23,7 @@ export default class MovingBallContainer {
         this.control = new MovingBallsControl(this.containerView, this.run.bind(this), config);
         this.mbService.adjustNumberOfBalls(this.control.NumberOfBalls);
         this.adjustBallsArray(this.control.NumberOfBalls);
-        this.el.appendChild(this.container);
+        this.containerEl.appendChild(this.container);
     }
 
     private adjustBallsArray(ballsToRender: number) {
@@ -68,7 +68,7 @@ export default class MovingBallContainer {
     }
 
     public destroy() {
-        this.el.removeChild(this.container);
+        this.containerEl.removeChild(this.container);
         window.cancelAnimationFrame(this.animationId);
     }
 }

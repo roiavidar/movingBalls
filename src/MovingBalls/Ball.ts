@@ -9,10 +9,10 @@ export default class Ball {
         directionLTR: true
     }
 
-    constructor(private el: HTMLElement) {
+    constructor(private containerEl: HTMLElement) {
         this.ball = document.createElement('div');
         this.ball.classList.add('ball');
-        this.el.appendChild(this.ball);
+        this.containerEl.appendChild(this.ball);
     }
 
     public render(color: BallColors, position: BallPosition) {
@@ -29,6 +29,6 @@ export default class Ball {
     }
 
     public destroy() {
-        this.el.removeChild(this.ball);
+        this.containerEl.removeChild(this.ball);
     }
 }
