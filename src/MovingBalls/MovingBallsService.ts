@@ -1,8 +1,7 @@
 import { BallColors, BallData, MovingBallsConfig } from "./types";
 
 export default class MovingBallsService {
-    private balls: Map<number, BallData> = new Map();
-    private ballCounter = 0;
+    private balls: BallData[] = [];
     private minSpeed: number;
     private maxSpeed: number;
     private minDistance: number;
@@ -22,43 +21,41 @@ export default class MovingBallsService {
     }
 
     get Balls() {
-        return new Map(this.balls);
+        return [...this.balls];
     }
 
     public adjustNumberOfBalls(newNumberOfBalls: number) {
-        if (this.balls.size < newNumberOfBalls) {
-            const newBallsToAdd = newNumberOfBalls - this.balls.size;
+        if (this.balls.length < newNumberOfBalls) {
+            const newBallsToAdd = newNumberOfBalls - this.balls.length;
             this.addBalls(newBallsToAdd);
             this.generateYPositions(newBallsToAdd);
-        } else if (newNumberOfBalls < this.balls.size) {
-            this.removeBalls(this.balls.size - newNumberOfBalls);
+        } else if (newNumberOfBalls < this.balls.length) {
+            this.removeBalls(this.balls.length - newNumberOfBalls);
         }
         this.generateSpeeds();
     }
 
     private addBalls(ballsToAdd: number) {
         for(let i=0; i<ballsToAdd; i++) {
-            this.ballCounter++;
-            this.balls.set(this.ballCounter, { });
+            this.balls.push({ });
         }
     }
 
     private generateYPositions(newNumberOfBalls: number) {
         for(let i=0; i<newNumberOfBalls; i++) {
-            const ball = this.balls.get(this.ballCounter - i);
+            const ball = this.balls[this.balls.length - i - 1];
             ball.position = {
-                directionLTR: true,
-                y: Math.floor(Math.random() * this.maxDistance) + this.minDistance,
-                x: undefined
+                    directionLTR: true,
+                    y: Math.floor(Math.random() * this.maxDistance) + this.minDistance,
+                    x: undefined
+                }
             }
-        }
     }
 
     private removeBalls(ballsToRemove: number) {
         for(let i=0; i<ballsToRemove; i++) {
-            this.balls.delete(this.ballCounter - i);
+            this.balls.splice(this.balls.length - 1, 1);
         }
-        this.ballCounter = this.ballCounter - ballsToRemove;
     }
 
     public calcNextStepInMovingBalls() {
@@ -94,8 +91,8 @@ export default class MovingBallsService {
     }
 
     private generateColors() {
-        let leftBall: BallData = this.balls.get(this.ballCounter);
-        let rightBall: BallData = this.balls.get(this.ballCounter - 1) || this.balls.get(this.ballCounter);
+        let leftBall: BallData = this.balls[this.balls.length - 1];
+        let rightBall: BallData = this.balls[this.balls.length - 2] || leftBall;
         this.balls.forEach((ball: BallData) => {
             ball.color = BallColors.IN_THE_MIDDLE;
             

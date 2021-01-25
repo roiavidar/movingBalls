@@ -5,7 +5,7 @@ import { BallData, MovingBallsConfig } from "./types";
 
 export default class MovingBallContainer {
     private mbService;
-    private ballsData: Map<number, BallData>;
+    private ballsData: BallData[];
     private container: HTMLElement;
     private containerView: HTMLElement;
     private control: MovingBallsControl;
@@ -47,7 +47,7 @@ export default class MovingBallContainer {
         }
     }
 
-    private run(newRun: boolean = true, numberOfBalls: number = this.ballsData.size) {
+    private run(newRun: boolean = true, numberOfBalls: number = this.ballsData.length) {
         if (newRun) {
             window.cancelAnimationFrame(this.animationId);
         }
@@ -58,9 +58,8 @@ export default class MovingBallContainer {
                 this.mbService.adjustNumberOfBalls(numberOfBalls);
             }
             this.ballsData = this.mbService.calcNextStepInMovingBalls();
-            let index = 0;
-            this.ballsData.forEach(({color, position}: BallData) => {
-                this.balls[index++].render(color, position);
+            this.ballsData.forEach(({color, position}: BallData, index: number) => {
+                this.balls[index].render(color, position);
             });
             
             this.animationId = window.requestAnimationFrame(() => this.run(false));
