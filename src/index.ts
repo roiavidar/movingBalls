@@ -7,6 +7,6 @@ const mb = new MovingBallContainer(root, {
     maxSpeed: 1,
     minBalls: 5,
     maxBalls: 100,
-    minDistance: 10,
-    maxDistance: 90
+    minDistance: 0,
+    maxDistance: 100
 });

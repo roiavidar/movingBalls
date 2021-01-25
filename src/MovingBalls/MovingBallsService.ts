@@ -13,6 +13,9 @@ export default class MovingBallsService {
         maxDistance: 100
     };
 
+    static minYDistance = 0;
+    static maxYDistance = 100;
+
     constructor({minSpeed, maxSpeed, minDistance, maxDistance}: MovingBallsConfig = MovingBallsService.defaultParams) {
         this.minSpeed = minSpeed || MovingBallsService.defaultParams.minSpeed;
         this.maxSpeed = maxSpeed || MovingBallsService.defaultParams.maxSpeed;
@@ -46,7 +49,7 @@ export default class MovingBallsService {
             const ball = this.balls[this.balls.length - i - 1];
             ball.position = {
                     directionLTR: true,
-                    y: Math.floor(Math.random() * this.maxDistance) + this.minDistance,
+                    y: Math.floor(Math.random() * MovingBallsService.maxYDistance) + MovingBallsService.minYDistance,
                     x: undefined
                 }
             }
