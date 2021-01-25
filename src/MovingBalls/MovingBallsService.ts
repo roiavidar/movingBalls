@@ -74,7 +74,7 @@ export default class MovingBallsService {
         this.balls.forEach((ball: BallData) => {
             if (ball.position.directionLTR) {
                 if (ball.position.x === undefined) { // ball created
-                    ball.position.x = 0;
+                    ball.position.x = this.minDistance;
                 } else { // ball moving ltr
                     ball.position.x = Math.min(ball.position.x + ball.speed, this.maxDistance);
                     if (ball.position.x === this.maxDistance) {
